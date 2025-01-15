@@ -13,18 +13,18 @@ import { CommonModule } from '@angular/common';
 export class HomeComponent implements OnInit {
   weatherData: any;
 
-  constructor(private readonly router: Router, private readonly homeService: HomeService) {}
+  constructor(private router: Router, private homeService: HomeService) {}
 
   ngOnInit(): void {
     this.getAllWeatherData();
   }
   getAllWeatherData() {
     this.homeService.weatherData().subscribe(
-      (data: any) => {
+      (data) => {
         this.weatherData = data;
         console.log('weather', this.weatherData);
       },
-      (error: any) => {
+      (error) => {
         console.log('Somthing went wrong ', error);
       }
     );

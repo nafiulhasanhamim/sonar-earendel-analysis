@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class HomeService {
   public weather_url = 'http://localhost:5214/weatherforecast';
 
-  constructor(private readonly httpClient: HttpClient, private readonly apiService: ApiService) {}
+  constructor(private httpClient: HttpClient, private apiService: ApiService) {}
   weatherData(): Observable<any> {
     return this.apiService.get(this.weather_url);
   }
