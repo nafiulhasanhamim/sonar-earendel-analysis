@@ -1,19 +1,22 @@
-# Ignore environment and secret files
-.env
-secrets.json
-private-key.pem
-
-# Ignore version control and metadata
-.git
-.gitignore
-.DS_Store
-
-# Ignore logs and temporary files
-*.log
-tmp/
-node_modules/
-
-# Ignore build files
+# Ignore build artifacts
 bin/
 obj/
-out/
+
+# Ignore Docker-specific files
+.dockerignore
+Dockerfile
+
+# Ignore version control
+.git
+.gitignore
+
+# Ignore temporary or IDE-specific files
+*.http
+*.log
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Ignore solution file (not needed in the image)
+backend.sln
