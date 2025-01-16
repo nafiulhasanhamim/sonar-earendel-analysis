@@ -1,16 +1,19 @@
-# Ignore environment files
+# Ignore environment and secret files
 .env
 secrets.json
+private-key.pem
 
-# Ignore version control system files
+# Ignore version control and metadata
 .git
 .gitignore
+.DS_Store
 
 # Ignore logs and temporary files
 *.log
 tmp/
 node_modules/
 
-# Ignore Docker itself
-Dockerfile
-docker-compose.yml
+# Ignore build files
+bin/
+obj/
+out/
