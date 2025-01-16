@@ -4,7 +4,7 @@
 
 - rakibul24466 (Team Leader)
 - nafiulhasanhamim
-- MFRSiam
+- MFRSiam.
 
 ## Mentor
 

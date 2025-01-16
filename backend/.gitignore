@@ -8,7 +8,7 @@ obj/Debug/net8.0/*
 *.dlls
 *.pdb
 *.pdbs
-Dockerfile
+
 
 # Logs
 Logs/
