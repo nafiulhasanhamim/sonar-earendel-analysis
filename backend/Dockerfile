@@ -2,12 +2,17 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /App
 
-# Copy the project file and restore dependencies
+# Copy project file and restore dependencies
 COPY backend.csproj ./
 RUN dotnet restore
 
-# Copy all source files except excluded ones from .dockerignore
-COPY . ./
+# Copy only the required source and config files
+COPY backend/ ./backend
+COPY appsettings.json ./appsettings.json
+COPY appsettings.Development.json ./appsettings.Development.json
+COPY Program.cs ./Program.cs
+
+# Build the project
 RUN dotnet publish -c Release -o out
 
 # Stage 2: Runtime stage
@@ -17,8 +22,8 @@ WORKDIR /App
 # Copy the built application from the build stage
 COPY --from=build-env /App/out .
 
-# Expose the default port
+# Expose the application port
 EXPOSE 80
 
-# Define the entry point
+# Set the entry point
 ENTRYPOINT ["dotnet", "backend.dll"]

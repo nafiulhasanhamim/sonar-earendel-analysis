@@ -1,22 +1,26 @@
-# Ignore build artifacts
+# Ignore build and runtime artifacts
 bin/
 obj/
+out/
 
-# Ignore Docker-specific files
-.dockerignore
-Dockerfile
+# Ignore sensitive files
+*.env
+secrets.json
+*.pem
 
-# Ignore version control
-.git
+# Ignore version control and IDE files
+.git/
 .gitignore
-
-# Ignore temporary or IDE-specific files
-*.http
-*.log
 .vscode/
 .idea/
-*.user
-*.suo
 
-# Ignore solution file (not needed in the image)
+# Ignore unnecessary files
+*.http
+*.log
+*.tmp
+.DS_Store
+
+# Ignore solution files (not needed in container)
 backend.sln
+Dockerfile
+.dockerignore
