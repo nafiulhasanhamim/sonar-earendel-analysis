@@ -21,8 +21,6 @@ USER appuser
 
 COPY --from=build-env /App/out .
 
-# Expose the application port
 EXPOSE 80
 
-# Set the entry point
 ENTRYPOINT ["dotnet", "backend.dll"]
