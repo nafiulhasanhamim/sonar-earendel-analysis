@@ -7,41 +7,65 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [RouterModule, CommonModule],
   template: `
-      <!-- Sidebar -->
-      <div
-        class="sidebar bg-white border-end"
-        style="width: 240px; height: 100vh;"
-      >
-        <div class="p-4">
-          <h2 class="h6 mb-4">Menu</h2>
-          <nav class="nav flex-column gap-2">
-            <a
-              class="nav-link active px-3 py-2 rounded-2"
-              routerLink="/interviewer-dashboard"
-            >
-              Dashboard
-            </a>
-            <a class="nav-link px-3 py-2 rounded-2" routerLink="/availability">
-              Availability
-            </a>
-            <a class="nav-link px-3 py-2 rounded-2" routerLink="/upcoming">
-              Upcoming Interviews
-            </a>
-            <a
-              class="nav-link px-3 py-2 rounded-2"
-              routerLink="/past-interviews"
-            >
-              Past Interviews
-            </a>
-            <a class="nav-link px-3 py-2 rounded-2" routerLink="/earnings">
-              Earnings
-            </a>
-            <a class="nav-link px-3 py-2 rounded-2" routerLink="/profile">
-              Profile
-            </a>
-          </nav>
-        </div>
+    <!-- Sidebar -->
+    <div
+      class="sidebar bg-white border-end"
+      style="width: 240px; height: 100vh;"
+    >
+      <div class="p-4">
+        <h2 class="h6 mb-4">Menu</h2>
+        <nav class="nav flex-column gap-2">
+          <a
+            class="nav-link px-3 py-2 rounded-2"
+            routerLink="/interviewer-dashboard"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Dashboard
+          </a>
+          <a
+            class="nav-link px-3 py-2 rounded-2"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="/interviewer-dashboard/availability"
+          >
+            Availability
+          </a>
+          <a
+            class="nav-link px-3 py-2 rounded-2"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="/interviewer-dashboard/upcoming"
+          >
+            Upcoming Interviews
+          </a>
+          <a
+            class="nav-link px-3 py-2 rounded-2"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="/interviewer-dashboard/past-interviews"
+          >
+            Past Interviews
+          </a>
+          <a
+            class="nav-link px-3 py-2 rounded-2"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="/interviewer-dashboard/earnings"
+          >
+            Earnings
+          </a>
+          <a
+            class="nav-link px-3 py-2 rounded-2"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="/interviewer-dashboard/profile"
+          >
+            Profile
+          </a>
+        </nav>
       </div>
+    </div>
   `,
   styles: [
     `

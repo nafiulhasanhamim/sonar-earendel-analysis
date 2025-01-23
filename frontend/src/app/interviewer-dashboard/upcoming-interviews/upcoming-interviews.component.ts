@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { PaginationComponent } from '../pagination/pagination.component';
 
 interface Interview {
   candidate: string;
@@ -14,13 +15,15 @@ interface Interview {
 @Component({
   selector: 'app-upcoming-interviews',
   standalone: true,
-  imports: [CommonModule, RouterModule, SidebarComponent],
+  imports: [CommonModule, RouterModule, SidebarComponent, PaginationComponent],
   template: `
     <div class="d-flex">
       <app-sidebar> </app-sidebar>
       <div class="container-fluid py-4">
         <h1 class="h3 mb-2">Upcoming Interviews</h1>
-        <p class="text-muted mb-4">You have 5 interviews scheduled</p>
+        <p class="text-muted mb-4">
+          You have {{ totalItems }} interviews scheduled
+        </p>
 
         <div class="card border-2 shadow-md">
           <div class="card-body p-0">
@@ -37,7 +40,7 @@ interface Interview {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let interview of interviews">
+                  <tr *ngFor="let interview of paginatedInterviews">
                     <td class="ps-4">{{ interview.candidate }}</td>
                     <td>{{ interview.role }}</td>
                     <td>{{ interview.company }}</td>
@@ -52,10 +55,13 @@ interface Interview {
                 </tbody>
               </table>
             </div>
-            <div class="border-top p-3 text-center">
-              <a href="#" class="text-decoration-none text-dark"
-                >View All Interviews</a
-              >
+            <div class="border-top">
+              <app-pagination
+                [currentPage]="currentPage"
+                [pageSize]="pageSize"
+                [totalItems]="totalItems"
+                (pageChange)="onPageChange($event)"
+              ></app-pagination>
             </div>
           </div>
         </div>
@@ -153,5 +159,54 @@ export class UpcomingInterviewsComponent {
       date: '2023-07-24',
       time: '13:30',
     },
+    {
+      candidate: 'Anna Taylor',
+      role: 'Data Scientist',
+      company: 'DataGenix',
+      date: '2023-07-25',
+      time: '10:00',
+    },
+    {
+      candidate: 'David Brown',
+      role: 'AI Engineer',
+      company: 'AI Solutions',
+      date: '2023-07-26',
+      time: '12:00',
+    },
+    {
+      candidate: 'Sophia Wilson',
+      role: 'Product Manager',
+      company: 'Innovators Inc.',
+      date: '2023-07-27',
+      time: '16:00',
+    },
+    {
+      candidate: 'James Miller',
+      role: 'QA Engineer',
+      company: 'QualityFirst',
+      date: '2023-07-28',
+      time: '09:30',
+    },
+    {
+      candidate: 'Mia Davis',
+      role: 'UX Designer',
+      company: 'DesignHub',
+      date: '2023-07-29',
+      time: '14:45',
+    },
   ];
+
+  currentPage = 1;
+  pageSize = 5;
+  totalItems = this.interviews.length;
+
+  get paginatedInterviews(): Interview[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return this.interviews.slice(startIndex, endIndex);
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+  }
 }
