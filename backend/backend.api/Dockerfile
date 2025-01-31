@@ -6,8 +6,16 @@ WORKDIR /App
 COPY backend.api.csproj ./
 RUN dotnet restore
 
-# Copy the full source code
-COPY . . 
+# Copy only required source files to prevent security risks
+COPY Program.cs ./Program.cs
+COPY appsettings.json ./appsettings.json
+COPY appsettings.Development.json ./appsettings.Development.json
+
+# Copy all C# source files and resources while avoiding unnecessary files
+# COPY Controllers/ ./Controllers
+# COPY Models/ ./Models
+# COPY Services/ ./Services
+COPY WeatherAppModel.cs/ ./WeatherAppModel.cs
 
 # Build and publish the application
 RUN dotnet publish -c Release -o out
