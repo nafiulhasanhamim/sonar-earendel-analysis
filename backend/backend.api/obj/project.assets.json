@@ -487,11 +487,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FullStack\\learnathon\\earendel1\\backend\\backend.api\\backend.api.csproj",
+      "projectUniqueName": "E:\\FullStack\\learnathon\\earendel1\\backend\\backend.api\\backend.api.csproj",
       "projectName": "backend.api",
-      "projectPath": "D:\\FullStack\\learnathon\\earendel1\\backend\\backend.api\\backend.api.csproj",
+      "projectPath": "E:\\FullStack\\learnathon\\earendel1\\backend\\backend.api\\backend.api.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\FullStack\\learnathon\\earendel1\\backend\\backend.api\\obj\\",
+      "outputPath": "E:\\FullStack\\learnathon\\earendel1\\backend\\backend.api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"

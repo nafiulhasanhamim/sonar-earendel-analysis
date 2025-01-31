@@ -6003,11 +6003,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FullStack\\learnathon\\earendel1\\backend\\backend.test\\backend.test.csproj",
+      "projectUniqueName": "E:\\FullStack\\learnathon\\earendel1\\backend\\backend.test\\backend.test.csproj",
       "projectName": "backend.test",
-      "projectPath": "D:\\FullStack\\learnathon\\earendel1\\backend\\backend.test\\backend.test.csproj",
+      "projectPath": "E:\\FullStack\\learnathon\\earendel1\\backend\\backend.test\\backend.test.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\FullStack\\learnathon\\earendel1\\backend\\backend.test\\obj\\",
+      "outputPath": "E:\\FullStack\\learnathon\\earendel1\\backend\\backend.test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -6022,8 +6022,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\FullStack\\learnathon\\earendel1\\backend\\backend.api\\backend.api.csproj": {
-              "projectPath": "D:\\FullStack\\learnathon\\earendel1\\backend\\backend.api\\backend.api.csproj"
+            "E:\\FullStack\\learnathon\\earendel1\\backend\\backend.api\\backend.api.csproj": {
+              "projectPath": "E:\\FullStack\\learnathon\\earendel1\\backend\\backend.api\\backend.api.csproj"
             }
           }
         }
