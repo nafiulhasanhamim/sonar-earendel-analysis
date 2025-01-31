@@ -12,10 +12,18 @@ COPY appsettings.json ./appsettings.json
 COPY appsettings.Development.json ./appsettings.Development.json
 
 # Copy all C# source files and resources while avoiding unnecessary files
-# COPY Controllers/ ./Controllers
-# COPY Models/ ./Models
-# COPY Services/ ./Services
+COPY Controllers/ ./Controllers
+COPY Models/ ./Models
+COPY Services/ ./Services
+COPY DTO/ ./DTO
+COPY Enums/ ./Enums
+COPY Extensions/ ./Extensions
+COPY Interfaces/ ./Interfaces
+COPY Profiles/ ./Profiles
+COPY RabbitMQ/ ./RabbitMQ
+# COPY Migrations/ ./Migrations
 COPY WeatherAppModel.cs/ ./WeatherAppModel.cs
+COPY data/ ./data
 
 # Build and publish the application
 RUN dotnet publish -c Release -o out
