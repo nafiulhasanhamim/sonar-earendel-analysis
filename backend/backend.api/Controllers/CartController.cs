@@ -14,11 +14,13 @@ namespace CartAPI.Controllers
         private readonly ICartService _cartService;
         private readonly IRedisCacheService _cache;
 
+        private readonly ILogger<CartController> _logger;
 
-        public CartController(ICartService cartService, IRedisCacheService cache)
+        public CartController(ICartService cartService, IRedisCacheService cache, ILogger<CartController> logger)
         {
             _cartService = cartService;
             _cache = cache;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -61,6 +63,8 @@ namespace CartAPI.Controllers
 
             // Save in Redis as a single object
             _cache.SetData("carts", result);
+
+            _logger.LogInformation("Fetching all categories...");
 
             return ApiResponse.Success(new { result = result }); // Ensure consistent structure
         }

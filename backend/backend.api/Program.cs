@@ -1,5 +1,4 @@
 using CartAPI;
-using CartAPI.Interfaces;
 using CartAPI.RabbitMQ;
 using CartAPI.Services;
 using CartAPI.Services.Caching;
@@ -7,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Prometheus;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -66,6 +67,14 @@ builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.Toke
 //         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]))
 //     };
 // });
+
+
+
+
+// Load Serilog configuration from appsettings.json
+SerilogConfig.ConfigureLogging(builder.Configuration);
+builder.Host.UseSerilog();
+
 
 //add controller services
 builder.Services.AddControllers();
@@ -149,6 +158,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
+
+// Enable Prometheus metrics
+app.UseMetricServer();
+app.UseSerilogRequestLogging(); // Enable logging of HTTP requests
+app.UseHttpMetrics();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

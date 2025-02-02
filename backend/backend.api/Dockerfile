@@ -24,6 +24,7 @@ COPY RabbitMQ/ ./RabbitMQ
 # COPY Migrations/ ./Migrations
 COPY WeatherAppModel.cs/ ./WeatherAppModel.cs
 COPY data/ ./data
+COPY Configurations/ ./Configurations
 
 # Build and publish the application
 RUN dotnet publish -c Release -o out
