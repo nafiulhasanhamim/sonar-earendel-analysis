@@ -76,7 +76,7 @@ jobs:
       - name: Build Docker Compose Image
         run: |
           docker-compose -f backend/backend.api/docker-compose.yml build
-        working-directory: backend/backend.api
+        # working-directory: backend/backend.api
 
       # Log in to Docker Hub
       - name: Push Docker Image
