@@ -76,7 +76,7 @@ jobs:
 
       # Upload Published App (Optional)
       - name: Upload Published Application
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: published-app
           path: backend/backend.api/publish/
