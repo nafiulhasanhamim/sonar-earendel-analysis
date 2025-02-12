@@ -2,7 +2,7 @@ using AutoMapper;
 using CartAPI.DTOs;
 using CartAPI.Interfaces;
 using CartAPI.Models;
-using CartAPI.RabbitMQ;
+// using CartAPI.RabbitMQ;
 using Microsoft.EntityFrameworkCore;
 
 namespace CartAPI.Services
@@ -11,14 +11,16 @@ namespace CartAPI.Services
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
-        private readonly IRabbmitMQCartMessageSender _messageBus;
+        // private readonly IRabbmitMQCartMessageSender _messageBus;
 
 
-        public CartService(AppDbContext context, IMapper mapper, IRabbmitMQCartMessageSender messageBus)
+        public CartService(AppDbContext context, IMapper mapper
+        // IRabbmitMQCartMessageSender messageBus
+        )
         {
             _context = context;
             _mapper = mapper;
-            _messageBus = messageBus;
+            // _messageBus = messageBus;
         }
 
         public async Task<CartItemDto> AddToCart(AddToCartDto addToCartDto, string userId)
@@ -45,11 +47,11 @@ namespace CartAPI.Services
 
             await _context.Carts.AddAsync(cartItem);
             await _context.SaveChangesAsync();
-            _messageBus.SendMessage(new
-            {
-                CartId = cartItem.CartId,
-                ProductId = addToCartDto.ProductId,
-            }, "CartExchange", "exchange");
+            // _messageBus.SendMessage(new
+            // {
+            //     CartId = cartItem.CartId,
+            //     ProductId = addToCartDto.ProductId,
+            // }, "CartExchange", "exchange");
             return _mapper.Map<CartItemDto>(cartItem);
         }
 

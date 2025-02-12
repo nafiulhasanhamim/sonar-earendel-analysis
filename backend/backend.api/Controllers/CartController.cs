@@ -4,6 +4,7 @@ using CartAPI.Services;
 using CartAPI.Services.Caching;
 using Microsoft.AspNetCore.Mvc;
 using ProductAPI.Controllers;
+using Serilog;
 
 namespace CartAPI.Controllers
 {
@@ -51,22 +52,36 @@ namespace CartAPI.Controllers
 
         public async Task<IActionResult> GetUserCart()
         {
-            var cachedCart = await _cache.GetDataAsync<CartDto>("carts"); // Fetch as single CartDto, not List<CartDto>
+            Log.Information("GetUserCart() called");
+
+            var cachedCart = await _cache.GetDataAsync<CartDto>("carts");
 
             if (cachedCart is not null)
             {
-                Console.WriteLine("Cart found in cache");
-                return ApiResponse.Success(new { result = cachedCart }); // Wrap in "result"
+                Log.Information("Cart found in cache for user: {UserId}", "123456");
+                return ApiResponse.Success(new { result = cachedCart });
             }
 
-            var result = await _cartService.GetUserCart("123456");
+            try
+            {
+                var result = await _cartService.GetUserCart("123456");
 
-            // Save in Redis as a single object
-            _cache.SetData("carts", result);
+                if (result == null)
+                {
+                    Log.Warning("No cart data found for user: {UserId}", "123456");
+                    return ApiResponse.BadRequest("Cart not found");
+                }
 
-            _logger.LogInformation("Fetching all categories...");
+                _cache.SetData("carts", result);
+                Log.Information("Cart fetched from database and cached for user: {UserId}", "123456");
 
-            return ApiResponse.Success(new { result = result }); // Ensure consistent structure
+                return ApiResponse.Success(new { result = result });
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error fetching cart for user: {UserId}", "123456");
+                return ApiResponse.BadRequest("An error occurred while fetching the cart");
+            }
         }
 
 

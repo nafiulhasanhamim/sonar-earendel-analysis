@@ -20,8 +20,8 @@ COPY Enums/ ./Enums
 COPY Extensions/ ./Extensions
 COPY Interfaces/ ./Interfaces
 COPY Profiles/ ./Profiles
-COPY RabbitMQ/ ./RabbitMQ
-# COPY Migrations/ ./Migrations
+# COPY RabbitMQ/ ./RabbitMQ
+COPY Migrations/ ./Migrations
 COPY WeatherAppModel.cs/ ./WeatherAppModel.cs
 COPY data/ ./data
 COPY Configurations/ ./Configurations

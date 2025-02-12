@@ -1,5 +1,5 @@
 using CartAPI;
-using CartAPI.RabbitMQ;
+// using CartAPI.RabbitMQ;
 using CartAPI.Services;
 using CartAPI.Services.Caching;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Prometheus;
 using Serilog;
+using Serilog.Sinks.Elasticsearch;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,8 +41,8 @@ builder.Services.AddStackExchangeRedisCache(options =>
 });
 
 //RabbitMQ
-builder.Services.AddSingleton<IRabbmitMQCartMessageSender, RabbmitMQCartMessageSender>();
-builder.Services.AddHostedService<RabbitMQConsumer>();
+// builder.Services.AddSingleton<IRabbmitMQCartMessageSender, RabbmitMQCartMessageSender>();
+// builder.Services.AddHostedService<RabbitMQConsumer>();
 
 //Add Config for Required Email
 builder.Services.Configure<IdentityOptions>(
@@ -72,8 +74,19 @@ builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.Toke
 
 
 // Load Serilog configuration from appsettings.json
-SerilogConfig.ConfigureLogging(builder.Configuration);
-builder.Host.UseSerilog();
+// SerilogConfig.ConfigureLogging(builder.Configuration);
+// builder.Host.UseSerilog();
+builder.Host.UseSerilog((context, config) =>
+{
+    config
+        .WriteTo.Console()
+        .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://elasticsearch:9200"))
+        {
+            AutoRegisterTemplate = true,
+            IndexFormat = "app-logs-{0:yyyy.MM.dd}"
+        })
+        .WriteTo.Http("http://logstash:5044", queueLimitBytes: 1000000); // Specify queueLimitBytes
+});
 
 
 //add controller services
