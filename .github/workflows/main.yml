@@ -27,7 +27,7 @@ jobs:
       # Restore dependencies
       - name: Restore Dependencies
         run: dotnet restore
-        working-directory: backend
+        working-directory: backend/backend.api
 
       # Build the application
       - name: Build Application
@@ -72,7 +72,7 @@ jobs:
         run: |
           dotnet restore
           dotnet publish -c Release -o publish
-          working-directory: backend/backend.api
+          working-directory: backend
 
       # Upload Published App (Optional)
       - name: Upload Published Application
