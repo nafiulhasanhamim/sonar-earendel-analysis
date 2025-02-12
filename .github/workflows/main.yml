@@ -42,10 +42,30 @@ jobs:
       
       
       # Build Docker Image
-      - name: Build Docker Image
-        run: |
-          docker build -t mdnafiulhasanhamim/backend-image:latest -f backend/backend.api/Dockerfile backend/backend.api
+      # - name: Build Docker Image
+      #   run: |
+      #     docker build -t mdnafiulhasanhamim/backend-image:latest -f backend/backend.api/Dockerfile backend/backend.api
           
+      # # Log in to Docker Hub
+      # - name: Push Docker Image
+      #   if: github.ref == 'refs/heads/main'
+      #   uses: docker/login-action@v2
+      #   with:
+      #     username: ${{ secrets.DOCKER_USERNAME }}
+      #     password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      # # Tag and Push Docker Image to Registry
+      # - name: Push Docker Image to Registry
+      #   run: |
+      #     docker tag mdnafiulhasanhamim/backend-image:latest mdnafiulhasanhamim/backend-image:latest
+      #     docker push mdnafiulhasanhamim/backend-image:latest
+
+      # Build Docker Image using Docker Compose
+      - name: Build Docker Compose Image
+        run: |
+          docker-compose -f backend/backend.api/docker-compose.yml build
+        working-directory: backend/backend.api
+
       # Log in to Docker Hub
       - name: Push Docker Image
         if: github.ref == 'refs/heads/main'
@@ -53,12 +73,13 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      
+
       # Tag and Push Docker Image to Registry
       - name: Push Docker Image to Registry
         run: |
-          docker tag mdnafiulhasanhamim/backend-image:latest mdnafiulhasanhamim/backend-image:latest
-          docker push mdnafiulhasanhamim/backend-image:latest
+          docker-compose -f backend/backend.api/docker-compose.yml push
+        working-directory: backend/backend.api
+
 
   publish:
     name: Publish Application
