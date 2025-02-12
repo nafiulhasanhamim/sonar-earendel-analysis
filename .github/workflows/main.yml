@@ -54,7 +54,7 @@ jobs:
 
       - name: Push Docker Image to Registry
         run: |
-          docker tag mdnafiulhasanhamim:latest mdnafiulhasanhamim/backend-image:latest
+          docker tag backend-image:latest mdnafiulhasanhamim/backend-image:latest
           docker push mdnafiulhasanhamim/backend-image:latest
 
   publish:
