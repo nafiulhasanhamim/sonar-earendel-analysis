@@ -27,7 +27,7 @@ jobs:
       # Restore dependencies
       - name: Restore Dependencies
         run: dotnet restore
-        working-directory: backend/backend.api
+        working-directory: backend
 
       # Build the application
       - name: Build Application
