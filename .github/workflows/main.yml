@@ -18,6 +18,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Debug Directory Structure
+        run: ls -R backend
+
       # Setup .NET SDK
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
@@ -26,13 +29,11 @@ jobs:
 
       # Restore dependencies
       - name: Restore Dependencies
-        run: dotnet restore
-        working-directory: backend/backend.api
+        run: dotnet restore backend/backend.sln
 
       # Build the application
       - name: Build Application
-        run: dotnet build --no-restore --configuration Release
-        working-directory: backend/backend.api
+        run: dotnet build backend/backend.sln --no-restore --configuration Release
 
       # Run Unit Tests
       # - name: Run Tests
@@ -57,24 +58,20 @@ jobs:
     needs: build
 
     steps:
-      # Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Setup .NET SDK
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
 
-      # Restore and Build
-      - name: Restore and Build
-        run: |
-          dotnet restore
-          dotnet publish -c Release -o publish
-          working-directory: backend/backend.sln
+      - name: Restore Dependencies
+        run: dotnet restore backend/backend.sln
 
-      # Upload Published App (Optional)
+      - name: Build and Publish
+        run: dotnet publish backend/backend.api/backend.api.csproj -c Release -o backend/backend.api/publish
+
       - name: Upload Published Application
         uses: actions/upload-artifact@v4
         with:
