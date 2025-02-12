@@ -72,7 +72,7 @@ jobs:
         run: |
           dotnet restore
           dotnet publish -c Release -o publish
-          working-directory: backend
+          working-directory: backend/backend.api
 
       # Upload Published App (Optional)
       - name: Upload Published Application
