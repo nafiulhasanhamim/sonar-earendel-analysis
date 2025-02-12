@@ -88,7 +88,7 @@ jobs:
       # Tag Docker Image before pushing
       - name: Tag Docker Image
         run: |
-          docker tag backend-image:latest mdnafiulhasanhamim/backend-image:latest
+          docker tag mdnafiulhasanhamim/backend-image:latest mdnafiulhasanhamim/backend-image:latest
 
       # Push Docker Image to Docker Hub
       - name: Push Docker Image to Registry
