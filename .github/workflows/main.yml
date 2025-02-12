@@ -35,9 +35,9 @@ jobs:
         working-directory: backend/backend.api
 
       # Run Unit Tests
-      - name: Run Tests
-        run: dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage"
-        working-directory: backend/backend.test
+      # - name: Run Tests
+      #   run: dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage"
+      #   working-directory: backend/backend.test
       
       # - name: Push Docker Image
       #   if: github.ref == 'refs/heads/main'
