@@ -67,11 +67,15 @@ jobs:
           sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
       
+      # Check if docker-compose.yml exists in the correct path
+      - name: Check if docker-compose.yml exists
+        run: |
+          ls -l backend/backend.api/
       
       # Build Docker Image using Docker Compose
       - name: Build Docker Compose Image
         run: |
-          docker-compose -f backend/backend.api build
+          docker-compose -f backend/backend.api/docker-compose.yml build
         working-directory: backend/backend.api
 
       # Log in to Docker Hub
@@ -85,7 +89,7 @@ jobs:
       # Tag and Push Docker Image to Registry
       - name: Push Docker Image to Registry
         run: |
-          docker-compose -f backend/backend.api push
+          docker-compose -f backend/backend.api/docker-compose.yml push
         working-directory: backend/backend.api
 
 
