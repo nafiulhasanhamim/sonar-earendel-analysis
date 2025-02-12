@@ -71,7 +71,7 @@ jobs:
       # Build Docker Image using Docker Compose
       - name: Build Docker Compose Image
         run: |
-          docker-compose -f backend/backend.api/docker-compose.yml build
+          docker-compose -f backend/backend.api build
         working-directory: backend/backend.api
 
       # Log in to Docker Hub
@@ -85,7 +85,7 @@ jobs:
       # Tag and Push Docker Image to Registry
       - name: Push Docker Image to Registry
         run: |
-          docker-compose -f backend/backend.api/docker-compose.yml push
+          docker-compose -f backend/backend.api push
         working-directory: backend/backend.api
 
 
