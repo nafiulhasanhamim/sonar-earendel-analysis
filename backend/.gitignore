@@ -8,8 +8,8 @@ obj/Debug/net8.0/*
 *.dlls
 *.pdb
 *.pdbs
-Api/Server/appsettings.json
-Api/Server/appsettings.Development.json
+backend/Api/Server/appsettings.json
+backend/Api/Server/appsettings.Development.json
 
 
 
