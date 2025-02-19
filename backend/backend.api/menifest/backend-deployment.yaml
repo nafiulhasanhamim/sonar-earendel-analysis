@@ -32,7 +32,7 @@ spec:
               value: redis
             - name: Redis__Port
               value: "6379"
-          image: backend-image
+          image: mdnafiulhasanhamim/backend-image:latest
           name: backend-container
           imagePullPolicy: Never
           ports:

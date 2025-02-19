@@ -76,16 +76,30 @@ builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.Toke
 // Load Serilog configuration from appsettings.json
 // SerilogConfig.ConfigureLogging(builder.Configuration);
 // builder.Host.UseSerilog();
+// builder.Host.UseSerilog((context, config) =>
+// {
+//     config
+//         .WriteTo.Console()
+//         .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://elasticsearch:9200"))
+//         {
+//             AutoRegisterTemplate = true,
+//             IndexFormat = "app-logs-{0:yyyy.MM.dd}"
+//         })
+//         .WriteTo.Http("http://logstash:5044", queueLimitBytes: 1000000); // Specify queueLimitBytes
+// });
+
+
 builder.Host.UseSerilog((context, config) =>
 {
     config
-        .WriteTo.Console()
         .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://elasticsearch:9200"))
         {
             AutoRegisterTemplate = true,
-            IndexFormat = "app-logs-{0:yyyy.MM.dd}"
+            IndexFormat = $"app-logs-{DateTime.UtcNow:yyyy.MM.dd}",
+            NumberOfShards = 2,
+            NumberOfReplicas = 1
         })
-        .WriteTo.Http("http://logstash:5044", queueLimitBytes: 1000000); // Specify queueLimitBytes
+        .WriteTo.Http("http://logstash:5044", queueLimitBytes: 1000000);
 });
 
 
