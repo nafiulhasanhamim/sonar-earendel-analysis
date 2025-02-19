@@ -3,6 +3,3 @@ backend/obj/
 *.cache
 **/appsettings.json
 **/appsettings.Development.json
-
-
-
