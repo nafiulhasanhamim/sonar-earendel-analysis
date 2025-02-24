@@ -61,3 +61,49 @@ public record FshPermission(string Description, string Action, string Resource, 
 }
 
 
+
+
+// public static class TMPermissions
+// {
+//     private static readonly FshPermission[] AllPermissions =
+//     [     
+//         // ... existing permissions ...
+        
+//         // Jobs permissions
+//         new("View Jobs", TMActions.View, TMResources.Jobs, IsBasic: true),      // Everyone can view
+//         new("Search Jobs", TMActions.Search, TMResources.Jobs, IsBasic: true),   // Everyone can search
+//         new("Create Jobs", TMActions.Create, TMResources.Jobs,
+//             IsHR: true, IsInterviewer: true, IsAdmin: true),                     // Admin, HR, Interviewer can create
+//         new("Update Jobs", TMActions.Update, TMResources.Jobs,
+//             IsHR: true, IsInterviewer: true, IsAdmin: true),                     // Admin, HR, Interviewer can update
+//         new("Delete Jobs", TMActions.Delete, TMResources.Jobs, IsAdmin: true),   // Only Admin can delete
+//         new("Export Jobs", TMActions.Export, TMResources.Jobs,
+//             IsHR: true, IsAdmin: true),                                          // Admin and HR can export
+
+//         // ... existing other permissions ...
+//     ];
+
+//     // Modified permission collections
+//     public static IReadOnlyList<FshPermission> All { get; } = new ReadOnlyCollection<FshPermission>(AllPermissions);
+//     public static IReadOnlyList<FshPermission> Root { get; } = new ReadOnlyCollection<FshPermission>(AllPermissions.Where(p => p.IsRoot).ToArray());
+//     public static IReadOnlyList<FshPermission> Admin { get; } = new ReadOnlyCollection<FshPermission>(AllPermissions.Where(p => p.IsAdmin || p.IsBasic).ToArray());
+//     public static IReadOnlyList<FshPermission> HR { get; } = new ReadOnlyCollection<FshPermission>(AllPermissions.Where(p => p.IsHR || p.IsBasic).ToArray());
+//     public static IReadOnlyList<FshPermission> Interviewer { get; } = new ReadOnlyCollection<FshPermission>(AllPermissions.Where(p => p.IsInterviewer || p.IsBasic).ToArray());
+//     public static IReadOnlyList<FshPermission> Basic { get; } = new ReadOnlyCollection<FshPermission>(AllPermissions.Where(p => p.IsBasic).ToArray());
+//     public static IReadOnlyList<FshPermission> Candidate { get; } = new ReadOnlyCollection<FshPermission>(AllPermissions.Where(p => p.IsBasic).ToArray());
+// }
+
+// // Modified FshPermission record to include IsAdmin
+// public record FshPermission(
+//     string Description,
+//     string Action,
+//     string Resource,
+//     bool IsBasic = false,
+//     bool IsRoot = false,
+//     bool IsHR = false,
+//     bool IsInterviewer = false,
+//     bool IsAdmin = false)
+// {
+//     public string Name => NameFor(Action, Resource);
+//     public static string NameFor(string action, string resource) => $"Permissions.{resource}.{action}";
+// }

@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  backend:
+    container_name: backend-container # Custom container name
+    image: backend-image
+    build:
+      context: ./ # Use current directory (backend.api) as the context
+      dockerfile: ./Dockerfile # Explicitly specify the Dockerfile path
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8000
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=TalentMesh;Username=postgres;Password=postgres
+    restart: always
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_DB: TalentMesh
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

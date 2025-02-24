@@ -4,7 +4,6 @@ public interface ICacheService
 {
     T? Get<T>(string key);
     Task<T?> GetAsync<T>(string key, CancellationToken token = default);
-
     void Refresh(string key);
     Task RefreshAsync(string key, CancellationToken token = default);
 

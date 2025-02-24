@@ -4,6 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+    <UserSecretsId>c9d72cb2-4532-4097-82a6-65eae1472564</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +14,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
   </ItemGroup>
 
@@ -19,6 +23,7 @@
     <ProjectReference Include="..\Framework\Core\Core.csproj" />
     <ProjectReference Include="..\Framework\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Migrations\PGSql\PGSql.csproj" />
+    <ProjectReference Include="..\Module\Experties\Experties.Infrastructure\Experties.Infrastructure.csproj" />
     <ProjectReference Include="..\Module\Jobs\Jobs.Infrastructure\Jobs.Infrastructure.csproj" />
   </ItemGroup>
 
