@@ -30,12 +30,12 @@ jobs:
       # Restore dependencies
       - name: Restore Dependencies
         # run: dotnet restore backend/backend.sln
-        run: dotnet restore backend/Api/Aspire/Aspire.sln
+        run: dotnet restore backend/Aspire/Aspire.sln
 
       # Build the application
       - name: Build Application
         # run: dotnet build backend/backend.sln --no-restore --configuration Release
-        run: dotnet build backend/Api/Aspire/Aspire.sln --no-restore --configuration Release
+        run: dotnet build backend/Aspire/Aspire.sln --no-restore --configuration Release
 
       # Run Unit Tests
       # - name: Run Tests
@@ -112,7 +112,7 @@ jobs:
 
       - name: Restore Dependencies
         # run: dotnet restore backend/backend.sln
-        run: dotnet restore backend/Api/Aspire/Aspire.sln
+        run: dotnet restore backend/Aspire/Aspire.sln
 
       - name: Build and Publish
         # run: dotnet publish backend/backend.api/backend.api.csproj -c Release -o backend/backend.api/publish
