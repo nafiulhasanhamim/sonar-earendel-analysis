@@ -45,13 +45,18 @@ jobs:
       # - name: Run Tests for All Modules
       #   run: dotnet test backend/Api/Module/Experties/Experties.Test
 
-      - name: Run Tests for All Modules
+      # - name: Run Tests for All Modules
+      #   run: |
+      #     for test_project in $(find backend/Api/Module -type d -name "*.Test")
+      #     do
+      #      echo "Running tests for: $test_project"
+      #      dotnet test "$test_project"
+      #     done
+
+      - name: Run Tests for All Modules in Parallel
         run: |
-          for test_project in $(find backend/Api/Module -type d -name "*.Test")
-          do
-           echo "Running tests for: $test_project"
-           dotnet test "$test_project"
-          done
+          find backend/Api/Module -type d -name "*.Test" | xargs -n 1 -P 4 dotnet test
+
 
       
       # Build Docker Image
