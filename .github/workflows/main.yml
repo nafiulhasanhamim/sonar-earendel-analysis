@@ -44,7 +44,7 @@ jobs:
 
       - name: Run Tests for All Modules
         # run: dotnet test backend/Api/Module/Experties/Experties.Test
-        run: dotnet test backend/Api/Module --no-build --configuration Release
+        run: dotnet test backend/Api/Module
 
       
       # Build Docker Image
