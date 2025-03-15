@@ -40,8 +40,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experties.Application", "..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experties.Infrastructure", "..\Api\Module\Experties\Experties.Infrastructure\Experties.Infrastructure.csproj", "{88C31733-44C2-4FC7-8D08-34B9391B7DE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalentMesh.test", "..\TalentMesh.test\TalentMesh.test.csproj", "{E4743B0E-B628-48C1-ADEB-6F1C22A5389A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

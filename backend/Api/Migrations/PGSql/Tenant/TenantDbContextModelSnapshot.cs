@@ -8,7 +8,7 @@ using TalentMesh.Framework.Infrastructure.Tenant.Persistence;
 
 #nullable disable
 
-namespace TalentMesh.Migrations.PGSql.Tenannt
+namespace TalentMesh.Migrations.PGSql.Tenant
 {
     [DbContext(typeof(TenantDbContext))]
     partial class TenantDbContextModelSnapshot : ModelSnapshot

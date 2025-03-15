@@ -12,7 +12,7 @@ using TalentMesh.Framework.Infrastructure.Identity.Persistence;
 namespace TalentMesh.Migrations.PGSql.Identity
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20250218224557_Add Identity Schema")]
+    [Migration("20250314173211_Add Identity Schema")]
     partial class AddIdentitySchema
     {
         /// <inheritdoc />

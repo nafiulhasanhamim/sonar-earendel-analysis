@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace TalentMesh.Migrations.PGSql.Tenannt
+namespace TalentMesh.Migrations.PGSql.Tenant
 {
     /// <inheritdoc />
-    public partial class AddTenantSchema : Migration
+    public partial class AddTenant9Schema : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

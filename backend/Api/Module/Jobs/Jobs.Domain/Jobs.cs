@@ -9,18 +9,18 @@ public class Jobs : AuditableEntity, IAggregateRoot
 {
     public string Name { get; private set; } = default!;
     public string? Description { get; private set; }
-    
+
     public static Jobs Create(string name, string? description)
     {
-        var user = new Jobs
+        var job = new Jobs
         {
             Name = name,
             Description = description
         };
 
-        user.QueueDomainEvent(new JobCreated() { User = user });
+        job.QueueDomainEvent(new JobCreated() { Job = job });
 
-        return user;
+        return job;
     }
 
     public Jobs Update(string? name, string? description)

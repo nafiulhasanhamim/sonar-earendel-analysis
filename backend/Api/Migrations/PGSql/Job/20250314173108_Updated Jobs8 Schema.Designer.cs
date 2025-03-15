@@ -9,11 +9,11 @@ using TalentMesh.Module.Job.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace TalentMesh.Migrations.PGSql.Jobs
+namespace TalentMesh.Migrations.PGSql.Job
 {
     [DbContext(typeof(JobDbContext))]
-    [Migration("20250223194832_Add jobss Schema")]
-    partial class AddjobssSchema
+    [Migration("20250314173108_Updated Jobs8 Schema")]
+    partial class UpdatedJobs8Schema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

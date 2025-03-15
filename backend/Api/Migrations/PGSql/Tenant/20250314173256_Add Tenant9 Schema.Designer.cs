@@ -9,11 +9,11 @@ using TalentMesh.Framework.Infrastructure.Tenant.Persistence;
 
 #nullable disable
 
-namespace TalentMesh.Migrations.PGSql.Tenannt
+namespace TalentMesh.Migrations.PGSql.Tenant
 {
     [DbContext(typeof(TenantDbContext))]
-    [Migration("20250218224641_Add Tenant Schema")]
-    partial class AddTenantSchema
+    [Migration("20250314173256_Add Tenant9 Schema")]
+    partial class AddTenant9Schema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

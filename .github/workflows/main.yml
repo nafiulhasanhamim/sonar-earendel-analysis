@@ -29,11 +29,13 @@ jobs:
 
       # Restore dependencies
       - name: Restore Dependencies
-        run: dotnet restore backend/backend.sln
+        # run: dotnet restore backend/backend.sln
+        run: dotnet restore backend/Api/Aspire/Aspire.sln
 
       # Build the application
       - name: Build Application
-        run: dotnet build backend/backend.sln --no-restore --configuration Release
+        # run: dotnet build backend/backend.sln --no-restore --configuration Release
+        run: dotnet build backend/Api/Aspire/Aspire.sln --no-restore --configuration Release
 
       # Run Unit Tests
       # - name: Run Tests
@@ -62,39 +64,37 @@ jobs:
 
       
       # Install Docker Compose
-      - name: Install Docker Compose
-        run: |
-          sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-          sudo chmod +x /usr/local/bin/docker-compose
+      # - name: Install Docker Compose
+      #   run: |
+      #     sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      #     sudo chmod +x /usr/local/bin/docker-compose
 
-      # Check if docker-compose.yml exists in the correct path
-      - name: Check if docker-compose.yml exists
-        run: |
-          ls -l backend/backend.api/
+      # # Check if docker-compose.yml exists in the correct path
+      # - name: Check if docker-compose.yml exists
+      #   run: |
+      #     ls -l backend/backend.api/
 
-      # Build Docker Image using Docker Compose
-      - name: Build Docker Compose Image
-        run: |
-          docker-compose -f backend/backend.api/docker-compose.yml build
-        # working-directory: backend/backend.api
+      # # Build Docker Image using Docker Compose
+      # - name: Build Docker Compose Image
+      #   run: |
+      #     docker-compose -f backend/backend.api/docker-compose.yml build
 
-      # Log in to Docker Hub
-      - name: Docker Hub Login
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+      # # Log in to Docker Hub
+      # - name: Docker Hub Login
+      #   uses: docker/login-action@v2
+      #   with:
+      #     username: ${{ secrets.DOCKER_USERNAME }}
+      #     password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Tag Docker Image before pushing
-      - name: Tag Docker Image
-        run: |
-          docker tag mdnafiulhasanhamim/backend-image:latest mdnafiulhasanhamim/backend-image:latest
+      # # Tag Docker Image before pushing
+      # - name: Tag Docker Image
+      #   run: |
+      #     docker tag mdnafiulhasanhamim/backend-image:latest mdnafiulhasanhamim/backend-image:latest
 
-      # Push Docker Image to Docker Hub
-      - name: Push Docker Image to Registry
-        run: |
-          docker-compose -f backend/backend.api/docker-compose.yml push
-        # working-directory: backend/backend.api
+      # # Push Docker Image to Docker Hub
+      # - name: Push Docker Image to Registry
+      #   run: |
+      #     docker-compose -f backend/backend.api/docker-compose.yml push
 
   publish:
     name: Publish Application
@@ -111,13 +111,16 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore Dependencies
-        run: dotnet restore backend/backend.sln
+        # run: dotnet restore backend/backend.sln
+        run: dotnet restore backend/Api/Aspire/Aspire.sln
 
       - name: Build and Publish
-        run: dotnet publish backend/backend.api/backend.api.csproj -c Release -o backend/backend.api/publish
+        # run: dotnet publish backend/backend.api/backend.api.csproj -c Release -o backend/backend.api/publish
+        run: dotnet publish backend/Api/Server/Server.csproj -c Release -o backend/Api/Server/publish
 
       - name: Upload Published Application
         uses: actions/upload-artifact@v4
         with:
           name: published-app
           path: backend/backend.api/publish/
+          path: backend/Api/Server/publish/

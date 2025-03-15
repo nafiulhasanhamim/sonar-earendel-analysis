@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using TalentMesh.Module.Job.Infrastructure.Messaging;
 
 namespace TalentMesh.Module.Job.Infrastructure;
 public static class JobModule
@@ -32,6 +33,7 @@ public static class JobModule
         ArgumentNullException.ThrowIfNull(builder);
         builder.Services.BindDbContext<JobDbContext>();
         builder.Services.AddScoped<IDbInitializer, JobDbInitializer>();
+        // builder.Services.AddHostedService<JobCreatedConsumer>();
         builder.Services.AddKeyedScoped<IRepository<Jobs>, JobRepository<Jobs>>("jobs:job");
         builder.Services.AddKeyedScoped<IReadRepository<Jobs>, JobRepository<Jobs>>("jobs:jobReadOnly");
         return builder;

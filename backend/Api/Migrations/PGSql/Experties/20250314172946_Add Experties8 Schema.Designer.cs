@@ -12,8 +12,8 @@ using TalentMesh.Module.Experties.Infrastructure.Persistence;
 namespace TalentMesh.Migrations.PGSql.Experties
 {
     [DbContext(typeof(ExpertiesDbContext))]
-    [Migration("20250222145849_Add Experties Schema")]
-    partial class AddExpertiesSchema
+    [Migration("20250314172946_Add Experties8 Schema")]
+    partial class AddExperties8Schema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,54 @@ namespace TalentMesh.Migrations.PGSql.Experties
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("TalentMesh.Module.Experties.Domain.Rubric", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset?>("Deleted")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastModifiedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("RubricDescription")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<Guid?>("SeniorityLevelId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("SubSkillId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<decimal>("Weight")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Rubrics", "experties");
+                });
 
             modelBuilder.Entity("TalentMesh.Module.Experties.Domain.Skill", b =>
                 {
