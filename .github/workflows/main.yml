@@ -42,15 +42,15 @@ jobs:
       #   working-directory: backend
       #   run: dotnet test backend.sln --no-build --configuration Release --collect:"XPlat Code Coverage"
 
-      - name: Run Tests for All Modules
-        run: dotnet test backend/Api/Module/Experties/Experties.Test
+      # - name: Run Tests for All Modules
+      #   run: dotnet test backend/Api/Module/Experties/Experties.Test
 
       - name: Run Tests for All Modules
         run: |
           for test_project in $(find backend/Api/Module -type d -name "*.Test")
           do
            echo "Running tests for: $test_project"
-           dotnet test "$test_project" --no-build --configuration Release
+           dotnet test "$test_project"
           done
 
       
