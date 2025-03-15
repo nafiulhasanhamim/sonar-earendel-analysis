@@ -44,7 +44,7 @@ jobs:
 
       - name: Run Tests for All Modules
   run: |
-    for proj in $(find backend/Api/Module -type f -name "*.csproj" -path "*/.Test/*.csproj"); do
+    for proj in $(find backend/Api/Module -type f -name "*.csproj" -path "*/.Test"); do
       echo "Running tests for $proj"
       dotnet test "$proj" --no-build --configuration Release --logger:"console;verbosity=normal"
     done
