@@ -44,7 +44,7 @@ jobs:
 
       - name: Run Tests for All Modules
         # run: dotnet test backend/Api/Module/Experties/Experties.Test
-        run: for proj in $(find backend/Api/Module -type f -name "*.csproj" -path "*/.Test/*.csproj"); do echo "Running tests for $proj" dotnet test "$proj" --no-build --configuration Release --logger:"console;verbosity=normal" done
+        run: for proj in $(find backend/Api/Module -type f -name "*.csproj" -path "*/.Test/*.csproj"); do echo "Running tests for $proj" dotnet test "$proj" --no-build --configuration Release --logger:"console;verbosity=normal"; done
 
       
       # Build Docker Image
