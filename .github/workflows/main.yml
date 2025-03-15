@@ -25,7 +25,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x' # Adjust this to your target framework version
+          dotnet-version: "8.0.x" # Adjust this to your target framework version
 
       # Restore dependencies
       - name: Restore Dependencies
@@ -41,7 +41,13 @@ jobs:
       # - name: Run Tests
       #   working-directory: backend
       #   run: dotnet test backend.sln --no-build --configuration Release --collect:"XPlat Code Coverage"
-      
+
+      - name: Run Tests for All Modules
+  run: |
+    for test_project in $(find backend/Api/Module -name "*.Test.csproj"); do
+      dotnet test "$test_project" --no-build --configuration Release
+    done
+
       
       # Build Docker Image
       # - name: Build Docker Image
@@ -108,7 +114,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: "8.0.x"
 
       - name: Restore Dependencies
         # run: dotnet restore backend/backend.sln
