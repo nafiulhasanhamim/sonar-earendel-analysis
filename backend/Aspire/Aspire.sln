@@ -40,6 +40,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experties.Application", "..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experties.Infrastructure", "..\Api\Module\Experties\Experties.Infrastructure\Experties.Infrastructure.csproj", "{88C31733-44C2-4FC7-8D08-34B9391B7DE4}"
 EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
