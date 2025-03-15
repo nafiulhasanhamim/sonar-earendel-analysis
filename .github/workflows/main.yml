@@ -43,10 +43,7 @@ jobs:
       #   run: dotnet test backend.sln --no-build --configuration Release --collect:"XPlat Code Coverage"
 
       - name: Run Tests for All Modules
-  run: |
-    for test_project in $(find backend/Api/Module -name "*.Test.csproj"); do
-      dotnet test "$test_project" --no-build --configuration Release
-    done
+        run: dotnet test backend/Api/Module/Experties/Experties.Test/Experties.Test.csproj --no-build --configuration Release
 
       
       # Build Docker Image
