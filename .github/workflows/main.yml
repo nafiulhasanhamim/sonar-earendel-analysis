@@ -44,7 +44,7 @@ jobs:
 
       - name: Run Tests for All Modules
         # run: dotnet test backend/Api/Module/Experties/Experties.Test
-        run: find backend/Api/Module -type f -name "*.Test.csproj" -exec dotnet test {}
+        run: find backend/Api/Module -type f -name "*.Test.csproj" -exec dotnet test {} --no-build --configuration Release \;
 
       
       # Build Docker Image
