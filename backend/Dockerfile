@@ -112,6 +112,12 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 # Set working directory inside the container
 WORKDIR /app
 
+# Create a non-root user for security
+RUN adduser --disabled-password --gecos "" appuser \
+    && chown -R appuser:appuser /App
+
+USER appuser
+
 # Copy the published files from the build stage
 COPY --from=publish /app/publish .
 
