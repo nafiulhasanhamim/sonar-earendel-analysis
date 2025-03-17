@@ -92,8 +92,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evaluator.Infrastructure", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evaluator.Test", "..\Api\Module\Evaluator\Evaluator.Test\Evaluator.Test.csproj", "{2A69A115-EF41-4C31-86CE-D4576634BD0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quizzes.Test", "..\Api\Module\Quizzes\Quizzes.Test\Quizzes.Test.csproj", "{9D636E70-59A4-4CBC-9407-1BC5460AB39C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quizzes.Test", "..\Api\Module\Quizzes\Quizzes.Test\Quizzes.Test.csproj", "{F989AA57-AD3A-46A0-A00F-F4C0A7B13E76}"
 EndProject
 Global
