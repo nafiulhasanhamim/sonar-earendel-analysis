@@ -36,11 +36,20 @@ jobs:
       - name: Build Application
         run: dotnet build backend/Aspire/Aspire.sln --no-restore --configuration Release
 
-      - name: Run Tests for All Modules in Parallel
+      - name: Run Tests for All Modules in Parallel and Summarize
         run: |
+          # Create a directory to store individual test outputs
+          
+          mkdir -p test-results
+          # Find all test project files and run them in parallel, saving output to a log file
           find backend/Api/Module -type f -name "*.Test.csproj" | \
-          xargs -n 1 -P 4 -I {} sh -c 'echo "Running tests for project: {}"; dotnet test "{}" || true'
-      
+          xargs -n 1 -P 4 -I {} sh -c 'echo "Running tests for project: {}"; dotnet test "{}" | tee "test-results/$(basename {}).log" || true'
+          # Output a summary by grepping for the test result summary lines
+          echo "### Final Test Summary ###"
+          grep "Passed!" test-results/*.log || echo "No test summary lines found."
+
+
+
       # Build Docker Image
       # - name: Build Docker Image
       #   run: |
