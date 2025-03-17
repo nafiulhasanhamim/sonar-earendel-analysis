@@ -36,7 +36,7 @@ jobs:
       - name: Build Application
         run: dotnet build backend/Aspire/Aspire.sln --no-restore --configuration Release
 
-      - name: Run Tests for All Modules in Parallel and Summarize
+      - name: Run Tests for All Modules in Parallel and Summarize results
         run: |
            mkdir -p test-results
            find backend/Api/Module -type f -name "*.Test.csproj" | \
