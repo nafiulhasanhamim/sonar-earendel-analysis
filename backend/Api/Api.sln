@@ -34,8 +34,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interviews.Domain", "Module
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interviews.Infrastructure", "Module\Interviews\Interviews.Infrastructure\Interviews.Infrastructure.csproj", "{3E01FF68-F8E5-8E6A-D88F-8A96193918A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interviews.Test", "Module\Interviews\Interviews.Test\Interviews.Test.csproj", "{C26C7CE4-2718-A0FC-E427-768061B8331F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Jobs", "Jobs", "{57C5F84B-2A19-A65A-901D-937EE551C212}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobs.Application", "Module\Jobs\Jobs.Application\Jobs.Application.csproj", "{3888FFEA-FFB2-B656-288D-2A564184923B}"
