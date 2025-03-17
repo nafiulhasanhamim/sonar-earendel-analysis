@@ -36,11 +36,6 @@ jobs:
       - name: Build Application
         run: dotnet build backend/Aspire/Aspire.sln --no-restore --configuration Release
 
-      # - name: Run Quizzes.Test
-        # run: dotnet test backend/Api/Module/Quizzes/Quizzes.Test.csproj --verbosity detailed
-      # - name: Run Evaluator.Test
-        # run: dotnet test backend/Api/Module/Evaluator/Evaluator.Test.csproj --verbosity detailed
-      
       - name: Run Tests for All Modules in Parallel and Summarize
         run: |
            mkdir -p test-results
