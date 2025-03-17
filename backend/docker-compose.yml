@@ -56,7 +56,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8000
-      - DOTNET_DASHBOARD_URL=http://aspire:18888 # Set the correct URL for the dashboard
+      - DOTNET_DASHBOARD_URL=http://aspire:18888
       - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=TalentMeshs;Username=postgres;Password=postgres
       - Redis__Host=redis
       - Redis__Port=6379
@@ -74,7 +74,7 @@ services:
           "--silent",
           "--fail",
           "http://localhost:8000/metrics",
-        ] # Adjust if needed
+        ]
       interval: 10s
       retries: 5
 
@@ -222,8 +222,8 @@ networks:
 #       - "5432:5432"
 #     volumes:
 #       - postgres_data:/var/lib/postgresql/data
-#     networks:
-#       - aspire_network
+    # networks:
+    #   - aspire_network
 #     healthcheck:
 #       test: ["CMD", "pg_isready", "-U", "postgres", "-d", "TalentMeshs"]
 #       interval: 10s
@@ -235,8 +235,8 @@ networks:
 #     restart: always
 #     ports:
 #       - "6379:6379"
-#     networks:
-#       - aspire_network
+    # networks:
+    #   - aspire_network
 
 #   rabbitmq:
 #     image: rabbitmq:3-management
@@ -282,8 +282,8 @@ networks:
 #     restart: always
 #     ports:
 #       - "9100:9100"
-#     networks:
-#       - aspire_network
+    # networks:
+    #   - aspire_network
 
 #   aspire:
 #     image: mcr.microsoft.com/dotnet/aspire-dashboard:latest
