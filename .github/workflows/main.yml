@@ -38,8 +38,8 @@ jobs:
 
       - name: Run Tests for All Modules in Parallel
         run: |
-          find backend/Api/Module -type d -name "*.Test" | xargs -n 1 -P 4 -I {} sh -c 'echo "Running tests for module: {}"; dotnet test "{}"'
-
+          find backend/Api/Module -type f -name "*.Test.csproj" | xargs -n 1 -P 4 -I {} sh -c 'echo "Running tests for project: {}"; dotnet test "{}"'
+      
       # Build Docker Image
       # - name: Build Docker Image
       #   run: |
