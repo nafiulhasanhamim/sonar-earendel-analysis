@@ -6,7 +6,6 @@ using TalentMesh.Module.Job.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 
 namespace TalentMesh.Module.Job.Infrastructure.Persistence;
@@ -18,8 +17,10 @@ public sealed class JobDbContext : TMDbContext
     {
     }
 
-    public DbSet<Jobs> Products { get; set; } = null!;
-
+    public DbSet<Jobs> Jobs { get; set; } = null!;
+    public DbSet<JobApplication> JobApplications { get; set; } = null!; 
+    public DbSet<JobRequiredSkill> JobRequiredSkill { get; set; } = null!;
+    public DbSet<JobRequiredSubskill> JobRequiredSubskill { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -48,9 +48,11 @@ namespace TalentMesh.Migrations.PGSql.Experties
                         .HasColumnType("uuid");
 
                     b.Property<string>("RubricDescription")
-                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("character varying(1000)");
+
+                    b.Property<Guid>("SeniorityId")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid?>("SeniorityLevelId")
                         .HasColumnType("uuid");
@@ -68,7 +70,88 @@ namespace TalentMesh.Migrations.PGSql.Experties
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SeniorityId");
+
+                    b.HasIndex("SubSkillId");
+
                     b.ToTable("Rubrics", "experties");
+                });
+
+            modelBuilder.Entity("TalentMesh.Module.Experties.Domain.Seniority", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset?>("Deleted")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastModifiedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Seniorities", "experties");
+                });
+
+            modelBuilder.Entity("TalentMesh.Module.Experties.Domain.SeniorityLevelJunction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset?>("Deleted")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastModifiedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SeniorityLevelId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SkillId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SeniorityLevelId");
+
+                    b.HasIndex("SkillId");
+
+                    b.ToTable("SeniorityLevelJunctions", "experties");
                 });
 
             modelBuilder.Entity("TalentMesh.Module.Experties.Domain.Skill", b =>
@@ -150,6 +233,42 @@ namespace TalentMesh.Migrations.PGSql.Experties
                     b.HasIndex("SkillId");
 
                     b.ToTable("SubSkills", "experties");
+                });
+
+            modelBuilder.Entity("TalentMesh.Module.Experties.Domain.Rubric", b =>
+                {
+                    b.HasOne("TalentMesh.Module.Experties.Domain.Seniority", "Seniority")
+                        .WithMany()
+                        .HasForeignKey("SeniorityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TalentMesh.Module.Experties.Domain.SubSkill", "SubSkill")
+                        .WithMany()
+                        .HasForeignKey("SubSkillId");
+
+                    b.Navigation("Seniority");
+
+                    b.Navigation("SubSkill");
+                });
+
+            modelBuilder.Entity("TalentMesh.Module.Experties.Domain.SeniorityLevelJunction", b =>
+                {
+                    b.HasOne("TalentMesh.Module.Experties.Domain.Seniority", "Seniority")
+                        .WithMany()
+                        .HasForeignKey("SeniorityLevelId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("TalentMesh.Module.Experties.Domain.Skill", "Skill")
+                        .WithMany()
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Seniority");
+
+                    b.Navigation("Skill");
                 });
 
             modelBuilder.Entity("TalentMesh.Module.Experties.Domain.SubSkill", b =>

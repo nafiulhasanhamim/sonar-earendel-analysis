@@ -3,5 +3,5 @@
 namespace TalentMesh.Module.Job.Domain.Events;
 public sealed record JobCreated : DomainEvent
 {
-    public Jobs? Job { get; set; }
+    public Jobs? User { get; set; }
 }

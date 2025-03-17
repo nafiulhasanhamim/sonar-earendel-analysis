@@ -23,12 +23,18 @@ public sealed class UpdateJobHandler(
             throw new JobNotFoundException(request.Id);
         }
 
-        var updatedBrand = brand.Update(request.Name, request.Description);
+        var updatedBrand = brand.Update(
+            request.Name,
+            request.Description,
+            request.Requirments,
+            request.Location,
+            request.JobType,
+            request.ExperienceLevel
+            );
+
         await repository.UpdateAsync(updatedBrand, cancellationToken);
 
-        logger.LogInformation("Brand with id : {BrandId} updated: Name='{BrandName}', Description='{BrandDescription}'",
-            brand.Id, request.Name, request.Description);
-
+        logger.LogInformation("Brand with id : {BrandId} updated.", brand.Id);
         return new UpdateJobResponse(brand.Id);
     }
 }
