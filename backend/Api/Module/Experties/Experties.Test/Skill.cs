@@ -8,36 +8,77 @@ using TalentMesh.Module.Experties.Application.Skills.Update.v1;
 using TalentMesh.Module.Experties.Domain.Exceptions;
 using TalentMesh.Framework.Core.Paging;
 using MediatR;
+using Microsoft.Extensions.Logging.Abstractions;
+using TalentMesh.Module.Experties.Domain;
+using TalentMesh.Framework.Core.Persistence;
+using Microsoft.Extensions.Logging;
 
 namespace TalentMesh.Module.Experties.Tests
 {
     public class SkillHandlerTests
     {
         private readonly Mock<ISender> _mediatorMock;
+        private readonly Mock<IRepository<Skill>> _repositoryMock;
+        private readonly Mock<ILogger<CreateSkillHandler>> _loggerMock;
+        private readonly CreateSkillHandler _handler;
 
         public SkillHandlerTests()
         {
             _mediatorMock = new Mock<ISender>();
+            _repositoryMock = new Mock<IRepository<Skill>>();
+            _loggerMock = new Mock<ILogger<CreateSkillHandler>>();
+            _handler = new CreateSkillHandler(_loggerMock.Object, _repositoryMock.Object);
         }
+
+        // [Fact]
+        // public async Task CreateSkill_ReturnsSkillResponse()
+        // {
+        //     var request = new CreateSkillCommand("C# Development", "Advanced C# programming");
+        //     var expectedId = Guid.NewGuid();
+        //     var response = new CreateSkillResponse(expectedId);
+
+        //     _mediatorMock
+        //         .Setup(m => m.Send(request, It.IsAny<CancellationToken>()))
+        //         .ReturnsAsync(response);
+
+        //     var result = await _mediatorMock.Object.Send(request);
+
+        // Assert.NotNull(result);
+        // Assert.Equal(expectedId, result.Id);
+        // Assert.IsType<CreateSkillResponse>(result);
+
+        // _mediatorMock.Verify(m => m.Send(It.IsAny<CreateSkillCommand>(), It.IsAny<CancellationToken>()), Times.Once);
+        // }
 
         [Fact]
         public async Task CreateSkill_ReturnsSkillResponse()
         {
+            // Arrange
             var request = new CreateSkillCommand("C# Development", "Advanced C# programming");
-            var expectedId = Guid.NewGuid();
-            var response = new CreateSkillResponse(expectedId);
+            var expectedSkill = Skill.Create(request.Name, request.Description); // Uses the domain factory method
 
-            _mediatorMock
-                .Setup(m => m.Send(request, It.IsAny<CancellationToken>()))
-                .ReturnsAsync(response);
+            _repositoryMock
+     .Setup(repo => repo.AddAsync(It.IsAny<Skill>(), It.IsAny<CancellationToken>()))
+     .ReturnsAsync((Skill skill, CancellationToken _) => skill)  // Returns the created skill
+     .Callback<Skill, CancellationToken>((skill, _) => expectedSkill = skill);
 
-            var result = await _mediatorMock.Object.Send(request);
+            // Act
+            var result = await _handler.Handle(request, CancellationToken.None);
 
+            // Assert
             Assert.NotNull(result);
-            Assert.Equal(expectedId, result.Id);
+            Assert.Equal(expectedSkill.Id, result.Id);
             Assert.IsType<CreateSkillResponse>(result);
 
-            _mediatorMock.Verify(m => m.Send(It.IsAny<CreateSkillCommand>(), It.IsAny<CancellationToken>()), Times.Once);
+            _repositoryMock.Verify(repo => repo.AddAsync(It.IsAny<Skill>(), It.IsAny<CancellationToken>()), Times.Once);
+            _loggerMock.Verify(
+                log => log.Log(
+                    LogLevel.Information,
+                    It.IsAny<EventId>(),
+                    It.Is<It.IsAnyType>((obj, type) => obj.ToString().Contains("skill created")),
+                    null,
+                    It.IsAny<Func<It.IsAnyType, Exception?, string>>()),
+                Times.Once);
         }
 
         [Fact]

@@ -107,6 +107,41 @@ jobs:
       #     docker-compose -f backend/backend.api/docker-compose.yml push
 
 
+
+      # Install Docker Compose
+      - name: Install Docker Compose
+        run: |
+          sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+
+      # Check if docker-compose.yml exists in the correct path
+      - name: Check if docker-compose.yml exists
+        run: |
+          ls -l backend/
+
+      # Build Docker Image using Docker Compose
+      - name: Build Docker Compose Image
+        run: |
+          docker-compose -f backend/docker-compose.yml build
+
+      # Log in to Docker Hub
+      - name: Docker Hub Login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Tag Docker Image before pushing
+      - name: Tag Docker Image
+        run: |
+          docker tag mdnafiulhasanhamim/backend_image mdnafiulhasanhamim/backend_image:v1.0
+
+      # Push Docker Image to Docker Hub
+      - name: Push Docker Image to Registry
+        run: |
+          docker-compose -f backend/docker-compose.yml push
+
+
   publish:
     name: Publish Application
     runs-on: ubuntu-latest
