@@ -40,7 +40,7 @@ jobs:
         run: |
            mkdir -p test-results
            find backend/Api/Module -type f -name "*.Test.csproj" | \
-             xargs -n 1 -P 4 -I {} sh -c 'echo "Running tests for project: {}"; dotnet test "{}" | tee "test-results/$(basename {}).log" || true'
+             xargs -I {} sh -c 'echo "Running tests for project: {}"; dotnet test "{}" | tee "test-results/$(basename {}).log" || true'
            echo "### Listing All Test Log Files ###"
            ls -l test-results
            echo "### Individual Test Summaries ###"
