@@ -1,9 +1,9 @@
 backend/bin/
 backend/obj/
 *.cache
-**/TenantConstant.cs
+# **/TenantConstant.cs
 **/appsettings.Development.json
-**/appsettings.json
+# **/appsettings.json
 backend/Shared/Authorization/TenantConstants.cs
 # backend/Api/Migrations/PGSql/Experties
 # backend/Api/Migrations/PGSql/Job
