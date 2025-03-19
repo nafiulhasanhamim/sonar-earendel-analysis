@@ -3,7 +3,7 @@ version: "3.3"
 services:
   backend:
     container_name: backend-container
-    image: backend_image:v1.0
+    image: mdnafiulhasanhamim/backend_image
     build:
       context: ./
       dockerfile: ./Dockerfile
