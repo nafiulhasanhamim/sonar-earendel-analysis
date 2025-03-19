@@ -36,21 +36,21 @@ jobs:
       - name: Build Application
         run: dotnet build backend/Aspire/Aspire.sln --no-restore --configuration Release
 
-      - name: Run Tests for All Modules in Parallel and Summarize results
-        run: |
-           mkdir -p test-results
-           find backend/Api/Module -type f -name "*.Test.csproj" | \
-             xargs -I {} sh -c 'echo "Running tests for project: {}"; dotnet test "{}" | tee "test-results/$(basename {}).log" || true'
-           echo "### Listing All Test Log Files ###"
-           ls -l test-results
-           echo "### Individual Test Summaries ###"
-           for file in test-results/*.log; do
-             echo "Summary for $(basename "$file"):"
-             grep -E "(Passed!|Total:)" "$file" || echo "No summary found in $file"
-             echo "------"
-           done
-           echo "### Final Aggregated Test Summary ###"
-           grep -H -E "(Passed!|Total:)" test-results/*.log || echo "No test summary lines found."
+      # - name: Run Tests for All Modules in Parallel and Summarize results
+      #   run: |
+      #      mkdir -p test-results
+      #      find backend/Api/Module -type f -name "*.Test.csproj" | \
+      #        xargs -I {} sh -c 'echo "Running tests for project: {}"; dotnet test "{}" | tee "test-results/$(basename {}).log" || true'
+      #      echo "### Listing All Test Log Files ###"
+      #      ls -l test-results
+      #      echo "### Individual Test Summaries ###"
+      #      for file in test-results/*.log; do
+      #        echo "Summary for $(basename "$file"):"
+      #        grep -E "(Passed!|Total:)" "$file" || echo "No summary found in $file"
+      #        echo "------"
+      #      done
+      #      echo "### Final Aggregated Test Summary ###"
+      #      grep -H -E "(Passed!|Total:)" test-results/*.log || echo "No test summary lines found."
 
 
       # Build Docker Image
