@@ -17,7 +17,7 @@ namespace TalentMesh.Module.Candidate.Application.CandidateProfile.Update.v1
 
             var candidateProfile = await repository.GetByIdAsync(request.Id, cancellationToken);
 
-            if (candidateProfile == null || candidateProfile.DeletedBy != Guid.Empty) throw new CandidateProfileNotFoundException(request.Id);
+            if (candidateProfile == null) throw new CandidateProfileNotFoundException(request.Id);
 
 
             var updatedJobApplication = candidateProfile.Update(request.Resume, request.Skills,request.Experience, request.Education);
